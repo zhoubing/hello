@@ -13,6 +13,8 @@ mod string;
 mod array;
 mod file;
 mod compound_struct;
+mod data;
+mod emu;
 
 fn main() {
 
@@ -64,5 +66,7 @@ fn main() {
     println!("{}", 12i32 - 22);
 
     compound_struct::handle_struct();
+    data::handle_data();
 
+    emu::begin_emu();
 }
