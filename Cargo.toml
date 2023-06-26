@@ -8,4 +8,7 @@ edition = "2021"
 [dependencies]
 clap = "2"
 num = "0.4.0"
+piston2d-graphics = "0.43.0"
+piston_window = "0.128.0"
+rand = "0.8.5"
 

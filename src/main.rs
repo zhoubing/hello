@@ -15,6 +15,8 @@ mod file;
 mod compound_struct;
 mod data;
 mod emu;
+mod memory;
+mod memory_gui;
 
 fn main() {
 
@@ -69,4 +71,11 @@ fn main() {
     data::handle_data();
 
     emu::begin_emu();
+
+    // memory::run();
+    memory::run_1();
+    memory::wrong_pointer();
+    // memory::run();
+
+    memory_gui::run();
 }
