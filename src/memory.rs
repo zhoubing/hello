@@ -6,6 +6,7 @@ static B: [u8; 10] = [99, 97, 114, 114, 121, 116, 111, 119, 101, 108];
 static C: [u8; 11] = [116, 104, 97, 110, 107, 115, 102, 105, 115, 104, 0];
 
 pub fn run() {
+    println!("=== memory run === ");
     let a = 40;
     let b: String;
     let c: Cow<str>;
@@ -23,6 +24,12 @@ pub fn run() {
 
     let heap_str = Box::new("123");
     println!("{}", *heap_str);
+
+
+    let a = "123";
+    let b: Box<&str> = Box::new(a);
+    println!("{}", *b);
+    println!("=== memory run === ");
 }
 
 pub fn run_1() {
@@ -32,6 +39,10 @@ pub fn run_1() {
         std::mem::transmute(a_ptr)
     };
     println!("{:p} {:x}", a_ptr, a_addr);
+
+    {
+        let str: String = String::from("value");
+    }
 }
 
 pub fn wrong_pointer() {

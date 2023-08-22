@@ -34,5 +34,8 @@ fn float_store() {
     for i in 0..23 {
         let mask = 1 << i;
         let one_at_bit = n_bits & mask;
+        if one_at_bit != 0 {
+            
+        }
     }
 }

@@ -6,9 +6,17 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+bincode = "1.0.1"
 clap = "2"
+kernel32-sys = "0.2.2"
 num = "0.4.0"
 piston2d-graphics = "0.43.0"
 piston_window = "0.128.0"
 rand = "0.8.5"
+serde = "1.0.171"
+serde_derive = "1"
+serde_json = "1"
+winapi = "0.3.9"
 
+byteorder = "1.2"
+crc = "1.7"

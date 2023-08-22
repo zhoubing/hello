@@ -16,18 +16,24 @@ mod compound_struct;
 mod data;
 mod emu;
 mod memory;
-mod memory_gui;
+mod windows;
+mod serializer;
+mod action_kv;
+mod smart_pointer;
 
 fn main() {
+    //命令行参数
+    // let args = App::new("demo")
+    // .version("1.0.0")
+    // .about("my demo")
+    // .arg(Arg::with_name("pattern").help("help me").takes_value(true).required(true))
+    // .get_matches();
 
-    let args = App::new("demo")
-    .version("1.0.0")
-    .about("my demo")
-    .arg(Arg::with_name("pattern").help("help me").takes_value(true).required(true))
-    .get_matches();
+    // let pattern = args.value_of("pattern").unwrap();
+    // print!("{}", pattern);
 
-    let pattern = args.value_of("pattern").unwrap();
-    print!("{}", pattern);
+
+
     // let mut data = 1;
     // thread::spawn(|| { data = 200;});
     // thread::spawn(|| { data = 300;});
@@ -77,5 +83,11 @@ fn main() {
     memory::wrong_pointer();
     // memory::run();
 
-    memory_gui::run();
+    windows::run();
+
+    serializer::run();
+
+    action_kv::run();
+
+    smart_pointer::run();
 }
