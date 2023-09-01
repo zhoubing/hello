@@ -20,6 +20,8 @@ mod windows;
 mod serializer;
 mod action_kv;
 mod smart_pointer;
+mod network;
+mod traits;
 
 fn main() {
     //命令行参数
@@ -88,6 +90,12 @@ fn main() {
     serializer::run();
 
     action_kv::run();
+    action_kv::run_akv_disk();
+    action_kv::run_akv_mem();
 
     smart_pointer::run();
+
+    network::run();
+
+    traits::run();
 }

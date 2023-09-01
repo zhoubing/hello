@@ -79,4 +79,6 @@ pub fn run() {
 
     let pb = PathBuf::from("c:/tmp/hello.txt");
     println!("{}", pb.extension().unwrap().to_str().unwrap()); //获取扩展名
+
+    
 }
