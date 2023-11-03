@@ -1,12 +1,18 @@
 use reqwest;
 use trust_dns::rr::Name;
 use trust_dns::serialize::binary::{BinEncoder, BinEncodable};
+use std::fmt::Display;
 use std::io::prelude::*;
-use std::net::{TcpStream, UdpSocket, SocketAddr};
+use std::net::{TcpStream, UdpSocket, SocketAddr, Ipv6Addr, AddrParseError};
 use std::time::Duration;
 
 use trust_dns::op::{Message, MessageType, OpCode, Query};
 use trust_dns::rr::record_type::RecordType;
+
+use std::io;
+use std::net;
+use std::fs::File;
+use std::error;
 
 pub fn run() {
     let mut resp = reqwest::get("https://bt529.com/").unwrap();
@@ -15,6 +21,8 @@ pub fn run() {
     tcp_request().unwrap();
 
     dns_query();
+
+    return_error().unwrap();
 }
 
 fn tcp_request() -> std::io::Result<()> {
@@ -62,6 +70,45 @@ fn dns_query() {
     }
 }
 
+
+#[derive(Debug)]
+enum UpstreamError {
+    IO(io::Error),
+    Parsing(net::AddrParseError),
+}
+
+impl Display for UpstreamError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{:?}", self)
+    }
+}
+
+impl error::Error for UpstreamError {}
+
+
+impl From<io::Error> for UpstreamError {
+    fn from(value: io::Error) -> Self {
+        UpstreamError::IO(value)
+    }
+}
+
+impl From<net::AddrParseError> for UpstreamError {
+    fn from(value: net::AddrParseError) -> Self {
+        UpstreamError::Parsing(value)
+    }
+}
+
+fn return_error() -> Result<(), UpstreamError> {
+    let f = File::open("./Cargo.toml").map_err(UpstreamError::IO);
+    let localhost = "".parse::<Ipv6Addr>().map_err(UpstreamError::Parsing);
+    match localhost {
+        Ok(e) => println!("return ok is {}", e),
+        Err(err) => eprintln!("return error is {}", err)
+    }
+    // let f = File::open("./Cargo.toml")?;  //使用到了前面的From trait,它将io::Error和net::AddrParseError转成了UpstreamError
+    // let localhost = "".parse::<Ipv6Addr>()?;
+    Ok(())
+}
 
 
 

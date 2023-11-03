@@ -1,6 +1,7 @@
 use std::{thread, env::args};
 use std::time::Duration;
 use clap::{App, Arg};
+use crate::threads::render_hex;
 
 mod statements;
 mod match_demo;
@@ -22,6 +23,12 @@ mod action_kv;
 mod smart_pointer;
 mod network;
 mod traits;
+mod mac_addr;
+mod mget;
+mod clock;
+mod threads;
+mod kernel;
+mod hardware_interrupt;
 
 fn main() {
     //命令行参数
@@ -89,13 +96,25 @@ fn main() {
 
     serializer::run();
 
-    action_kv::run();
-    action_kv::run_akv_disk();
-    action_kv::run_akv_mem();
+    // action_kv::run();
+    // action_kv::run_akv_disk();
+    // action_kv::run_akv_mem();
 
     smart_pointer::run();
 
-    network::run();
+    // network::run();
 
     traits::run();
+
+    // mac_addr::run();
+
+    // mget::mget::run();
+
+    // clock::clock::run();
+
+    threads::threads::run();
+
+    render_hex::run();
+
+    hardware_interrupt::interrupt::interrupt_test();
 }
